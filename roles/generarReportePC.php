@@ -188,7 +188,7 @@
 	            	
 	            echo ("'./analista.php?usuario_rol=$usuarioSeguir'"); } elseif ($id_rol1 == 1) {
 	            	
-	            echo ("'./lulu.php?usuario_rol=$usuarioSeguir'"); }?> ><img src="./img/icbuzon.png" alt="x" height="17" width="20"/>      Bandeja</a>
+	            echo ("'./lulu.php?usuario_rol=$usuarioSeguir'"); }?> ><img src="./img/2_ic.png" alt="x" height="17" width="20"/>      Bandeja</a>
 	          </li>
 	        	<?php if($id_rol1 == 3) {
 
@@ -217,6 +217,8 @@
 	          </li>
 	          
 	         
+	          <br>
+	          <br>
 	          <br>
 	          <br>
 	          <br>

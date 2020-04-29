@@ -87,9 +87,9 @@
 	            	
 	            echo ("'./analista.php?usuario_rol=$usuarioSeguir'"); } elseif ($id_rol1 == 1) {
 	            	
-	            echo ("'./lulu.php?usuario_rol=$usuarioSeguir'"); }?> ><img src="./img/icbuzon.png" alt="x" height="17" width="20"/>      Bandeja</a>
+	            echo ("'./lulu.php?usuario_rol=$usuarioSeguir'"); }?> ><img src="./img/2_ic.png" alt="x" height="17" width="20"/>      Bandeja</a>
 	          </li>
-	        	<?php if($id_rol1 == 2) {
+	        	<?php if($id_rol1 == 2 || $id_rol1 == 3 ) {
 
 
 	            	
@@ -105,20 +105,20 @@
 	            <?php 
 	        }
 	           ?>
-	          <?php if($id_rol1 == 2 && $id_rol1 == 0 && $id_rol1 == 1 && $id_rol1 == 4) {
+	          <?php if($id_rol1 == 2 || $id_rol1 == 0 || $id_rol1 == 1 || $id_rol1 == 4 || $id_rol1 == 5) {
 
 
 	            	
 	           ?>
-	           <li class=" estilo-color">
-	            <a href=  <?php echo ("'./generarReportePC.php?usuario_rol=$usuarioSeguir'"); ?> ><img src="./img/icreport2.png" alt="x" height="17" width="20"/>Reporte Profesional</a>
-	          </li>
+	           
 	       <?php }else{
 
 	        		
 	            	
 	           ?>
-	            
+	            <li class=" estilo-color">
+	            <a href=  <?php echo ("'./generarReportePC.php?usuario_rol=$usuarioSeguir'"); ?> ><img src="./img/icreport2.png" alt="x" height="17" width="20"/>Reporte Profesional</a>
+	          </li>
 	            <?php 
 	        }
 	           ?>
@@ -127,11 +127,29 @@
 	          <li class=" estilo-color">
 	              <a  href= <?php echo ("'./consultaEstado.php?usuario_rol=$usuarioSeguir'");?> ><img src="./img/ic-consulta.png" alt="x" height="17" width="17"/> Consulta</a>
 	          </li>
+	          <?php if($id_rol1 == 2 || $id_rol1 == 3 || $id_rol1 == 4 || $id_rol1 == 5) {
+
+
+	            	
+	           ?>
+	       <?php }else{
+
+	        		
+	            	
+	           ?>
+	            <li class=" estilo-color">
+	            <a href=  <?php echo ("'./guardarVista.php?usuario_rol=$usuarioSeguir'"); ?> ><img src="./img/upload1.png" alt="x" height="17" width="20"/>     Guardar Documentos</a>
+	          </li>
+	            <?php 
+	        }
+	           ?>
 	          
 	         
 	          <br>
 	          <br>
 	          <br>
+	          <br>
+	           <br>      
 	          <br>
 	          <br>
 	          <br>

@@ -323,7 +323,7 @@
 	         <li class=' estilo-color'>
 	            <a href=  <?php if($id_rol1 == 3){echo ("'./CapturistaTostado.php?usuario_rol=$usuarioSeguir'"); } elseif ($id_rol1 == 2) {
 	            	
-	            echo ("'./analista.php?usuario_rol=$usuarioSeguir'"); }?>  > <img src='./img/icbuzon.png' alt='x' height='17' width='20'/>      Bandeja</a>
+	            echo ("'./analista.php?usuario_rol=$usuarioSeguir'"); }?>  > <img src='./img/2_ic.png' alt='x' height='17' width='20'/>      Bandeja</a>
 			</li>
 	          <li class=" estilo-color">
 	              <a href= <?php echo ("'./consultaEstado.php?usuario_rol=$usuarioSeguir'");?>><img src="./img/ic-consulta.png" alt="x" height="17" width="17"/> Consulta</a>
@@ -343,6 +343,8 @@
 			          </li>
 
 	            </center>
+	          <br>
+	          <br>
 	          <br>
 	          <br>
 	          <br>
