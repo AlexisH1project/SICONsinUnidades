@@ -206,14 +206,7 @@
 
 					<div class="form-group col-md-12">
 						<div class="col text-center">
-							<div class="columnaBoton">
-								<input type="reset" class="btn btn-secondary" value="Borrar">
-							</div>
-							<div class="columnaBoton">	
 								<input type="submit" name="buscar" onclick="'<?php $_GET['usuario_rol']; ?>'" class="btn btn btn-danger tamanio-button plantilla-input text-white bord" value="Buscar">
-
-							</div>
-							<!-- <button type="submit" name="buscar" class="btn btn-outline-info tamanio-button">Buscar</button> -->
 							<br>
 						</div>
 					</div>
@@ -221,7 +214,13 @@
 					</div>
 				</div>
 			</form>
-
+			<form enctype="multipart/form-data" method="post" action="">
+				<div class="form-group col-md-12">
+						<div class="col text-center">
+								<input type="submit" class="btn btn-secondary" name="borrar" value="Borrar">
+						</div>
+					</div>
+			</form>
 		</div>
 	
 	</div>
@@ -548,7 +547,7 @@
 											<br>
 											<br>
 											<div class="col-sm-12 ">
-											<div class="p-3 mb-5 bg-warning text-dark ">
+											<div class="plantilla-inputv text-dark">
 											    <div class="card-body"><h2 align="center">No existe resultados de la busqueda, vuelve intentar.</h2></div>
 										</div>
 										</div>');
