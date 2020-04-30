@@ -50,21 +50,14 @@
 
 	<?php 
 		include "configuracion.php";
-		$noFomope = $_GET['noFomope'];
-				//echo $noFomope;
-				
 				$usuarioSeguir = $_GET['usuario_rol'];
 
 			$sqlNombre = "SELECT nombrePersonal, id_rol FROM usuarios WHERE usuario = '$usuarioSeguir'";
 			$result = mysqli_query($conexion,$sqlNombre);
 			$nombreU = mysqli_fetch_row($result);
-
-			 
-
-
-			
-
 		 ?>
+ <br>
+ <br>
  <br>
 
 
@@ -267,26 +260,28 @@
 				</div> -->
 					<div class="form-group col-md-12">
 						<div class="col text-center">
-							<div class="columnaBoton">
-								<input type="reset" class="btn btn-secondary" value="Borrar">
-							</div>
+							
 							<div class="columnaBoton">	
 								 <input type="submit" name="guardarAdj" class="btn btn btn-danger tamanio-button plantilla-input text-white bord" value="Guardar"><br> 
 
 							</div>
-							<!-- <button type="submit" name="buscar" class="btn btn-outline-info tamanio-button">Buscar</button> -->
-							<br>
+							
 						</div>
 					</div>
 
 			</form>
 
-		</div>
-	
-	</div>
+			<form enctype="multipart/form-data" method="post" action="">
+				<div class="form-group col-md-12">
+						<div class="col text-center">
+							<div class="columnaBoton">
+								<input type="submit" class="btn btn-secondary" name="borrar" value="Borrar">
+							</div>
+						</div>
+					</div>
+		</form>
 
-		<br>
-		<br>
+		</div>
 		<?php
 							$arrayView = explode("_", $listaMostrar);
 												 $tamanio = count($arrayView);
@@ -316,10 +311,7 @@
 									$idDoc = mysqli_fetch_row($resRol);
 
 									$enviarDoc = $idDoc[1].'_'.$concatenarNombDoc;
-
-								
-
-									$dir_subida = './documentos/';
+									$dir_subida = './Controller/documentos/';
 											// Arreglo con todos los nombres de los archivos
 											$files = array_diff(scandir($dir_subida), array('.', '..')); 
 											
@@ -340,12 +332,12 @@
 											        	break;
 											    }
 											}
-
+									//guardamos el archivo que se selecciono en la carpeta 
 											$fichero_subido = $dir_subida . basename($_FILES['nameArchivo']['name']);
 											$extencion2 = explode(".",$fichero_subido);
 											$tamnio = count($extencion2);
 
-											$extencion3 = $extencion2[$tamnio-1];
+											$extencion3 = $extencion2[$tamnio-1]; //el ".pdf"
 
 											if (move_uploaded_file($_FILES['nameArchivo']['tmp_name'], $fichero_subido)) {
 												sleep(3);
@@ -355,11 +347,12 @@
 													$arrayDoc = explode("_", $nombreCompletoArch);
 												 	$tamanioList = count($arrayDoc);
 												
-												 
+												 //los mandamos a la funcion para que al volver a cargar la pagina no se pierdan los datos de ese input
 												echo "
 													<script>
 															listaDeDoc( '$nombreCompletoArch', '$enviarDoc');
 													</script >";
+												//imprimimos la lista de documentos que se han cargado
 												echo '
 													<br>	<br>		<br>
 													<center>
@@ -390,9 +383,19 @@
 								//$limite = count($arrayDoc);
 
 								//actualizamos la base para poder tener el registro de los documentos
+								include "./configuracion.php";
+								$usuarioSeguir = $_GET['usuario_rol'];
+
+								 $hoy = "select CURDATE()";
+
+								 if ($resultHoy = mysqli_query($conexion,$hoy)) {
+								 		$rowHoy = mysqli_fetch_row($resultHoy);
+								 }
+
+
 								for($i=0; $i < count($arrayDoc)-1 ; $i++){
 									$nombreAsignar = $arrayDoc[$i];
-									$sqlAgregar =  "UPDATE fomope SET $arrayDoc[$i] = '$nombreAsignar' WHERE rfc = '$elRfc'";
+									$sqlAgregar = "UPDATE fomope SET $arrayDoc[$i] = '$nombreAsignar', usuarioAdjuntarDoc = '$usuarioSeguir $rowHoy[0]'  WHERE rfc = '$elRfc'";
 									if ($resUpdate = mysqli_query($conexion, $sqlAgregar)){
 
 									}else{
@@ -402,10 +405,20 @@
 								}
 
 							}
+
+					if(isset($_POST['borrar'])){
+						$usuarioSeguir = $_GET['usuario_rol'];
+							//session_destroy();
+		   	  				echo "<script type='text/javascript'>javascript:window.location='./guardarVista.php?usuario_rol=$usuarioSeguir'</script>";  //=$usuarioE
+
+					}
+
+
 						?>	
 
-	
-			  
+	</div>
+		<br>
+			
 	</center>
 
 			
