@@ -231,10 +231,10 @@
 			}
 	
 		</script>
-
-  </head>
-
-  <body>
+<script src="js/funciones.js"></script>
+		
+	</head>
+	<body onload="nobackbutton();">
     	
 		<?php 
 			include "Controller/configuracion.php";

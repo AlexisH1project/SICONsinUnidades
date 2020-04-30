@@ -219,9 +219,10 @@
 
 		</script>
 
-
+<script src="js/funciones.js"></script>
+		
 	</head>
-	<body>
+	<body onload="nobackbutton();">
 		<?php 
 			include "Controller/configuracion.php";
 			$usuarioSeguir =  $_GET['usuario_rol'];

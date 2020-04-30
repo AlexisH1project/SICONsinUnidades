@@ -93,7 +93,7 @@
 
 
 	</head>
-	<body>
+	<body onload="nobackbutton();">
 		<?php
 				include "configuracion.php";
 				$usuarioSeguir =  $_GET['usuario_rol'];

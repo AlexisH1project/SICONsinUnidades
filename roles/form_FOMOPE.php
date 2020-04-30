@@ -207,6 +207,11 @@ $(document).ready(function(){
 
 			function eliminarReq(){
 					 $('#MotivoRechazo').removeAttr("required");
+					  $('#idProfesional').removeAttr("required");
+
+			}
+			function eliminarReq2(){
+					 $('#MotivoRechazo').removeAttr("required");
 
 			}
 
@@ -219,18 +224,24 @@ $(document).ready(function(){
 				    var d = $("#codigo").val();
 				    var e = $("#cod2_1").val();
 				    var f = $("#del2").val();
-				    var g = $("#MotivoRechazo").val();
+				    //var g = $("#MotivoRechazo").val();
 			  
 				    //var h = $("#TipoEntregaArchivo").val();
 				    
-				    if (a=="" || b=="" || c==""|| d==""|| e==""|| f==""|| g=="") {
+				    if (a=="" || b=="" || c==""|| d==""|| e==""|| f=="") {
 				      		return false;
 				      }else{
 				      	$('#capturaF').hide();
 			      		$('#rechazo').hide();
+			      		$('#genera').hide();
 				      	var btn_2 = document.getElementById('bandejaEntrada');
 			            	btn_2.style.display = 'inline';
 			       	  }
+			}
+			function nobackbutton(){
+			   window.location.hash="no-back-button";
+			   window.location.hash="Again-No-back-button" //chrome
+			   window.onhashchange=function(){window.location.hash="no-back-button";}
 			}
 
 
@@ -267,7 +278,7 @@ $(document).ready(function(){
 					
 			}
 			$sql = "SELECT id_mov, cod_mov, tipo_mov, area_mov FROM ct_movimientosrh";
-			$sql2 = "SELECT rfc, apellido_1,apellido_2, nombre, unidad, justificacionRechazo FROM nombreUfomope WHERE id_movimiento = '$noFomope'";
+			$sql2 = "SELECT rfc, apellido_1,apellido_2, nombre, unidad, justificacionRechazo FROM fomope WHERE id_movimiento = '$noFomope'";
 			if($result = mysqli_query($conexion,$sql2)){
 				$row = mysqli_fetch_row($result);
 
@@ -703,7 +714,7 @@ $(document).ready(function(){
 								      </div>
 								      <div class="modal-footer">
 								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Regresar</button>
-										<input type="submit" class="btn btn-primary" name="accionB" onclick="eliminarReq()" value="Capturar">
+										<input type="submit" class="btn btn-primary" onclick="eliminarReq()" name="accionB" value="Capturar">
 
 								       	<!-- <button type="submit" class="btn btn-primary">Capturar</button> -->
 								       	
@@ -711,11 +722,9 @@ $(document).ready(function(){
 								    </div>
 								  </div>
 								</div>
-							</div>
-						</div>
-					
+							
 
-				</div>
+		
 
 						<div class="modal fade" id="exampleModalRT" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							  <div class="modal-dialog" role="document">
@@ -745,7 +754,7 @@ $(document).ready(function(){
 							  <div class="modal-dialog" role="document">
 							    <div class="modal-content">
 							      <div class="modal-header">
-							        <h5 class="modal-title" id="exampleModalLabel">Reporte Profesional de carrera</h5>
+							        <h5 class="modal-title" id="exampleModalLabel2">Reporte Profesional de carrera</h5>
 							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							          <span aria-hidden="true">&times;</span>
 							        </button>
@@ -755,7 +764,7 @@ $(document).ready(function(){
 							       
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-secondary" data-dismiss="modal">REGRESAR</button>
-									<input type="submit" class="btn btn-primary" id="generar" name="accionB" onclick="eliminarReq()"   value="generar">
+									<input type="submit" class="btn btn-primary" id="generar" onclick="eliminarReq2()" name="accionB"  value="generar">
 							      </div>
 							     
 							    </div>

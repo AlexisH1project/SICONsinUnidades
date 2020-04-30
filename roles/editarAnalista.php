@@ -174,9 +174,10 @@
 			       	  }
 			}
 		</script>
-
+<script src="js/funciones.js"></script>
+		
 	</head>
-	<body>
+	<body onload="nobackbutton();">
 		<?php 
 
 			include "configuracion.php";
