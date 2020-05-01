@@ -374,11 +374,51 @@
 
 
 									while($ver=mysqli_fetch_row($result)){ 
-
+										switch ($ver[1]) {
+											case 'negro1':
+												$estadoF = 'DDSCH Rechazo';
+												break;
+											case 'negro':
+												$estadoF = 'Unidad Edición';
+												break;
+											case 'amarillo':
+												$estadoF = 'DSPO captura';
+												break;		
+											case 'amarillo0':
+												$estadoF = 'DDSCH Autorización';
+												break;
+											case 'cafe':
+												$estadoF = 'DSPO Autorización';
+												break;	
+											case 'naranja':
+												$estadoF = 'DIPSP Autorización';
+												break;
+											case 'azul':
+												$estadoF= 'DGRHO Autorización';
+												break;
+											case 'rosa':
+												$estadoF = 'DSPO nomina';
+												break;		
+											case 'verde':
+												$estadoF = 'DDSCH loteo';
+												break;
+											case 'verde2':
+												$estadoF = 'DDSCH Autorización Loteo';
+												break;	
+											case 'gris':
+												$estadoF = 'DDSCH Edición';
+												break;
+											case 'guinda':
+												$estadoF = 'Finalizado';
+												break;		
+											default:
+												
+												break;
+										}
 						 ?>
 						<tr>
 							
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
@@ -491,7 +531,19 @@
 					        		$row = mysqli_fetch_assoc($resultado2);
 					        		$id_mov = $row['id_movimiento'];
 					        	}
-
+					        	switch ($ver[1]) {
+											
+											case 'naranja':
+												$estadoF = 'DIPSP Autorización';
+												break;
+											case 'azul':
+												$estadoF= 'DGRHO Autorización';
+												break;
+											
+											default:
+												
+												break;
+										}
 
 						 ?>
 
@@ -502,7 +554,7 @@
 								  <label><input type="checkbox" value="<?php echo $ver[0] ?>" name="radios"></label>
 								</div>
 							</td>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>

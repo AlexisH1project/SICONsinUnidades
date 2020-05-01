@@ -1,12 +1,3 @@
-<?php 
-session_start();
-	$usuarioSeguir =  $_GET['usuario_rol'];
-
-	// $cookie_name =  $_GET['usuario_rol'];
-	// 				$cookie_value = "John Doe";
-	// 				setcookie($cookie_name,$cookie_value); // 86400 = 1 day
-				
-?>
 
 
 <html>
@@ -185,29 +176,11 @@ session_start();
 			<?php
 				include "configuracion.php";
 
-				// if($_COOKIE["$usuarioSeguir"]!= ""){
-			 //    	echo '<script type="text/javascript">javascript:window.location="../LoginMenu/vista/cerrarsesion.php"</script>';
-			 // 	}
+				
 				$usuarioE =  $_GET['usuario_rol'];
 
-				if (empty($_SESSION['count'])) {
-					
-				   $_SESSION['count'] = 1;
-				} else {
-				   $_SESSION['count']++;
-
-				}
-
-				if($_SESSION['count'] > 1){
-					 	session_destroy();
-		   	  			echo "<script type='text/javascript'>javascript:window.location='./analista.php?usuario_rol=$usuarioE'</script>";
-				}
-					// if(!isset($_COOKIE[$cookie_name])) {
-					//     echo "Cookie named '" . $cookie_name . "' is not set!";
-					// } else {
-					//     echo "Cookie '" . $cookie_name . "' is set!<br>";
-					//     echo "Value is: " . $_COOKIE[$cookie_name];
-					// }
+				
+				$usuarioSeguir =  $_GET['usuario_rol'];
 			?>
 
 <br>
@@ -266,10 +239,6 @@ session_start();
 						 });*/
 				</script>
 				
-			
-		
-			<br>
-			
 			<form method="post" action=""> 
 				<div class="plantilla-inputv text-center">
 					<div class="form-row">
@@ -335,12 +304,15 @@ session_start();
 	
 	</div>
 
-	<table class="table table-hover table-white">
+		<br>
+		<br>
+
+		<table class="table table-hover table-white">
 						<thead>
 						    <tr>
 							<!-- <td>Observacion</td>
 							<td>ID Fomope</td> -->
-						     <th scope="titulo">Color del estado</th>
+						      <th scope="titulo">Estado Fomope</th>
 						      <th scope="titulo">Unidad</th>
 						      <th scope="titulo">RFC</th>
 						      <th scope="titulo">QNA</th>
@@ -349,18 +321,20 @@ session_start();
 						      <th scope="titulo">Fecha Autorización</th>
 						      <th scope="titulo">Fecha de Captura</th>
 
-
 						   </tr>
 					 	 </thead>
-		<?php 
+
+					<?php 
 						include "configuracion.php";
 
 						if(isset($_POST['buscar'])){// $_SERVER['REQUEST_METHOD'] == 'POST' if(){
 							$qnaBuscar = $_POST['qnaOption'];
 							$rfcBuscar = $_POST['rfc'];
 							$anioBuscar = $_POST['anio'];
-							
-						if($rfcBuscar != "" && $qnaBuscar != "" && $anioBuscar != ""){
+
+
+							//echo "User Has submitted the form and entered this name : <b> $qnaBuscar </b>";
+					if($rfcBuscar != "" && $qnaBuscar != "" && $anioBuscar != ""){
 
 								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE (rfc='$rfcBuscar' AND quincenaAplicada='$qnaBuscar' AND anio='$anioBuscar')";
 
@@ -393,7 +367,10 @@ session_start();
 								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE (anio='$anioBuscar')";
 								
 							}
+
+
 							$sqlColor="SELECT colorAsignado FROM usuarios WHERE usuario='$usuarioSeguir'";
+
 
 							if ($result = mysqli_query($conexion,$sql)) {
 
@@ -411,23 +388,62 @@ session_start();
 								}else{
 
 
-									while($ver=mysqli_fetch_row($result)){ 
+					while($ver=mysqli_fetch_row($result)){ 
+						switch ($ver[1]) {
+											case 'negro1':
+												$estadoF = 'DDSCH Rechazo';
+												break;
+											case 'negro':
+												$estadoF = 'Unidad Edición';
+												break;
+											case 'amarillo':
+												$estadoF = 'DSPO captura';
+												break;		
+											case 'amarillo0':
+												$estadoF = 'DDSCH Autorización';
+												break;
+											case 'cafe':
+												$estadoF = 'DSPO Autorización';
+												break;	
+											case 'naranja':
+												$estadoF = 'DIPSP Autorización';
+												break;
+											case 'azul':
+												$estadoF= 'DGRHO Autorización';
+												break;
+											case 'rosa':
+												$estadoF = 'DSPO nomina';
+												break;		
+											case 'verde':
+												$estadoF = 'DDSCH loteo';
+												break;
+											case 'verde2':
+												$estadoF = 'DDSCH Autorización Loteo';
+												break;	
+											case 'gris':
+												$estadoF = 'DDSCH Edición';
+												break;
+											case 'guinda':
+												$estadoF = 'Finalizado';
+												break;		
+											default:
+												
+												break;
+										}
 
 						 ?>
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
 							<td><?php echo $ver[5] ?></td>
 							<td><?php echo $ver[6] ?></td>
 							<td><?php echo $ver[7] ?></td>
-							<td><?php echo $ver[8] ?></td>
+							<td><?php echo $ver[8] ?></td>	
 
-
-
-							<td>
-								
+							<td>		
 								<?php
 									if ($resultColor = mysqli_query($conexion,$sqlColor)) {
 										$verColor=mysqli_fetch_row($resultColor);
@@ -436,38 +452,32 @@ session_start();
 										$colores2 = explode(",",$verColor[0]);
 										//echo $verColor[0] . "  >>>>>>>";
 										//echo $colores2[1] . "  >>>>>>>";
+										$datosCaptura = $ver[0]."||".$usuarioSeguir."||0";
 
 										if($totalColor != 0){
-											if($ver[1] == "amarillo" ){
-												$datos=$ver[0]."||".$usuarioSeguir."||2";
-										
+											if($ver[1] == "negro1" ){
+										$datos=$ver[0]."||".$usuarioSeguir."||4";
 								?>
-												<button type="button" class="btn btn-outline-secondary" onclick="agregaform('<?php echo $datos ?>')" id="" >Capturar</button>
-								<?php	
-											}else if($ver[1] == "negro1"){
-												$datos=$ver[0]."||".
-												$usuarioSeguir."||5";
-								?>	
 												<button type="button" class="btn btn-outline-secondary" onclick="agregaform('<?php echo $datos ?>')" id="" >Editar</button>
-
 								<?php	
-
 											}else if($ver[1] == "cafe"){
-												$datos=$ver[0]."||".
-												$usuarioSeguir."||3";
+												$datos=$ver[0]."||".$usuarioSeguir."||3";
 								?>	
-												<button type="button" class="btn btn-outline-secondary" onclick="agregaform('<?php echo $datos ?>')" id="" >Autorización</button>
+												<button type="button" class="btn btn-outline-secondary" onclick="agregaform('<?php echo $datos ?>')" id="" >Autorizar</button>
 
 								<?php	
-
-											}else if($ver[1] == "rosa"){
-												$datos=$ver[0]."||".
-												$usuarioSeguir."||6";
+											}else if($ver[1] == "amarillo"){
+												$datos=$ver[0]."||".$usuarioSeguir."||1";
 								?>	
-												
-										<button type="button" class="btn btn-outline-secondary" data-toggle="modal"  data-target="#exampleModalN" >
+												<button type="button" class="btn btn-outline-secondary" onclick="agregaform('<?php echo $datos ?>')" id="" >Capturar</button>
+
+								<?php	
+											}else if($ver[1] == "rosa"){
+												$datos=$ver[0]."||".$usuarioSeguir."||6";
+								?>	
+												<button type="button" class="btn btn-outline-secondary" data-toggle="modal"  data-target="#exampleModalN" >
 																 Nomina
-											</button>
+												</button>
 
 								<?php	
 
@@ -489,7 +499,7 @@ session_start();
 						}
 						 ?>
 		</table>
-		
+
 
 			<div class="col-sm-12">
 				
@@ -503,7 +513,7 @@ session_start();
 						<thead>
 						    <tr>
 						       <th scope="titulo">Autorizar</th>
-						      <th scope="titulo">Color Estado</th>
+						      <th scope="titulo">Estado Fomope</th>
 						      <th scope="titulo">Unidad</th>
 						      <th scope="titulo">RFC</th>
 						      <th scope="titulo">QNA</th>
@@ -532,7 +542,16 @@ session_start();
 					        	}
 					        $datos=$ver[0]."||".
 								$usuarioSeguir."||3";
-
+								switch ($ver[1]) {
+											
+											case 'cafe':
+												$estadoF = 'DSPO Autorización';
+												break;	
+											
+											default:
+												
+												break;
+										}
 
 						 ?>
 
@@ -542,7 +561,7 @@ session_start();
 								  <label><input type="checkbox" value="<?php echo $ver[0] ?>" name="radios"></label>
 								</div>
 							</td>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
@@ -623,7 +642,7 @@ session_start();
 						    <tr>
 							<!-- <td>Observacion</td>
 							<td>ID Fomope</td> -->
-						     <th scope="titulo">Color Estado</th>
+						     <th scope="titulo">Estado Fomope</th>
 						      <th scope="titulo">Unidad</th>
 						      <th scope="titulo">RFC</th>
 						      <th scope="titulo">QNA</th>
@@ -652,12 +671,21 @@ session_start();
 					        	}
 					        	$datos=$ver[0]."||".
 								$usuarioSeguir."||2";
-
+								switch ($ver[1]) {
+											
+											case 'amarillo':
+												$estadoF = 'DSPO captura';
+												break;		
+											
+											default:
+												
+												break;
+										}
 
 						 ?>
 
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
@@ -708,7 +736,7 @@ session_start();
 						    <tr>
 							<!-- <td>Observacion</td>
 							<td>ID Fomope</td> -->
-						       <th scope="titulo">Color Estado</th>
+						       <th scope="titulo">Estado Fomope</th>
 						      <th scope="titulo">Unidad</th>
 						      <th scope="titulo">RFC</th>
 						      <th scope="titulo">QNA</th>
@@ -738,12 +766,20 @@ session_start();
 					        	}
 					        	$datos=$id_mov."||".
 								$usuarioSeguir."||5";
-
+								switch ($ver[1]) {
+											case 'negro1':
+												$estadoF = 'DDSCH Rechazo';
+												break;
+										
+											default:
+												
+												break;
+										}
 
 						 ?>
 
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
@@ -795,7 +831,7 @@ session_start();
 						    <tr>
 							<!-- <td>Observacion</td>
 							<td>ID Fomope</td> -->
-						     <th scope="titulo">Color Estado</th>
+						     <th scope="titulo">Estado Fomope</th>
 						      <th scope="titulo">Unidad</th>
 						      <th scope="titulo">RFC</th>
 						      <th scope="titulo">QNA</th>
@@ -823,12 +859,21 @@ session_start();
 					        		$id_mov = $row['id_movimiento'];
 					        	}
 					        	$datos=$id_mov."||".$usuarioSeguir."||6";
-
+					        	switch ($ver[1]) {
+											
+											case 'rosa':
+												$estadoF = 'DSPO nomina';
+												break;		
+											
+											default:
+												
+												break;
+										}
 
 						 ?>
 
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>

@@ -293,7 +293,7 @@
 						    <tr>
 							<!-- <td>Observacion</td>
 							<td>ID Fomope</td> -->
-						       <th scope="titulo">Color del estado</th>
+						       <th scope="titulo">Estado Fomope</th>
 						      <th scope="titulo">Unidad</th>
 						      <th scope="titulo">RFC</th>
 						      <th scope="titulo">QNA</th>
@@ -371,9 +371,53 @@
 
 									while($ver=mysqli_fetch_row($result)){ 
 
+
+										switch ($ver[1]) {
+											case 'negro1':
+												$estadoF = 'DDSCH Rechazo';
+												break;
+											case 'negro':
+												$estadoF = 'Unidad Edición';
+												break;
+											case 'amarillo':
+												$estadoF = 'DSPO captura';
+												break;		
+											case 'amarillo0':
+												$estadoF = 'DDSCH Autorización';
+												break;
+											case 'cafe':
+												$estadoF = 'DSPO Autorización';
+												break;	
+											case 'naranja':
+												$estadoF = 'DIPSP Autorización';
+												break;
+											case 'azul':
+												$estadoF= 'DGRHO Autorización';
+												break;
+											case 'rosa':
+												$estadoF = 'DSPO nomina';
+												break;		
+											case 'verde':
+												$estadoF = 'DDSCH loteo';
+												break;
+											case 'verde2':
+												$estadoF = 'DDSCH Autorización Loteo';
+												break;	
+											case 'gris':
+												$estadoF = 'DDSCH Edición';
+												break;
+											case 'guinda':
+												$estadoF = 'Finalizado';
+												break;		
+											default:
+												
+												break;
+										}
+
 						 ?>
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
@@ -396,6 +440,7 @@
 
 										if($totalColor != 0){
 											if($ver[1] == "verde"){
+												$datosCaptura = $ver[0]."||".$usuarioSeguir."||0";
 
 								?>	
 												<button type="button" class="btn btn-outline-secondary" onclick="accionesRolL('<?php echo $datosCaptura ?>')" id="" >Capturar</button>
@@ -410,7 +455,7 @@
 											
 								<?php
 											}else if($ver[1] == "negro"){
-												$datosCaptura = $ver[0]."||".$usuarioSeguir."||4";
+												$datosCaptura = $ver[0]."||".$usuarioSeguir."||1";
 								?>	
 												<button type="button" class="btn btn-outline-secondary" onclick="accionesRolL('<?php echo $datosCaptura ?>')" id="ver2" >Editar</button>
 
@@ -446,7 +491,7 @@
 						    <tr>
 							<!-- <td>Observacion</td>
 							<td>ID Fomope</td> -->
-						      <th scope="titulo">Color Estado</th>
+						      <th scope="titulo">Estado Fomope</th>
 						      <th scope="titulo">Unidad</th>
 						      <th scope="titulo">RFC</th>
 						      <th scope="titulo">QNA Aplicada</th>
@@ -474,12 +519,23 @@
 					        	}
 					        	$datos=$id_mov."||".
 								$ver[0]."||0";
+								switch ($ver[1]) {
+											
+											case 'verde':
+												$estadoF = 'DDSCH loteo';
+												break;
+											
+											default:
+												
+												break;
+										}
+
 
 
 						 ?>
 
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
@@ -553,7 +609,7 @@
 						    <tr>
 							<!-- <td>Observacion</td>
 							<td>ID Fomope</td> -->
-						       <th scope="titulo">Color Estado</th>
+						       <th scope="titulo">Estado Fomope</th>
 						      <th scope="titulo">Unidad</th>
 						      <th scope="titulo">RFC</th>
 						      <th scope="titulo">QNA Aplicada</th>
@@ -579,11 +635,25 @@
 					        		$id_mov = $row['id_movimiento'];
 					        	}
 					        	$datos=$ver[0]."||".$usuarioSeguir."||1";
+					        	switch ($ver[1]) {
+											
+											case 'negro':
+												$estadoF = 'Unidad Edición';
+												break;
+											
+											case 'gris':
+												$estadoF = 'DDSCH Edición';
+												break;
+												
+											default:
+												
+												break;
+										}
 
 						 ?>
 
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>

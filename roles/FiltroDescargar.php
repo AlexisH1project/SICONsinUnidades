@@ -325,7 +325,7 @@
 							?>
 
 			<?php
-								$dir_subida = './Controller/documentosLoteo/';
+								$dir_subida = './Controller/Documentos/';
 
 								// Arreglo con todos los nombres de los archivos
 								$files = array_diff(scandir($dir_subida), array('.', '..')); 

@@ -207,7 +207,7 @@
 
 			<br>
 			
-			<form method="post" action=""> 
+		<form method="post" action=""> 
 				<div class="plantilla-inputv text-center">
 					<div class="form-row">
 						<div class="col">
@@ -271,7 +271,28 @@
 		</div>
 	
 	</div>
-			<?php 
+
+		<br>
+		<br>
+
+		<table class="table table-hover table-white">
+						<thead>
+						    <tr>
+							<!-- <td>Observacion</td>
+							<td>ID Fomope</td> -->
+						      <th scope="titulo">Estado Fomope</th>
+						      <th scope="titulo">Unidad</th>
+						      <th scope="titulo">RFC</th>
+						      <th scope="titulo">QNA</th>
+						      <th scope="titulo">Fecha de Ingreso</th>
+						      <th scope="titulo">Codigo Mov.</th>
+						      <th scope="titulo">Fecha Autorización</th>
+						      <th scope="titulo">Fecha de Captura</th>
+
+						   </tr>
+					 	 </thead>
+
+					<?php 
 						include "configuracion.php";
 
 						if(isset($_POST['buscar'])){// $_SERVER['REQUEST_METHOD'] == 'POST' if(){
@@ -280,37 +301,38 @@
 							$anioBuscar = $_POST['anio'];
 
 
-						if($rfcBuscar != "" && $qnaBuscar != "" && $anioBuscar != ""){
+							//echo "User Has submitted the form and entered this name : <b> $qnaBuscar </b>";
+					if($rfcBuscar != "" && $qnaBuscar != "" && $anioBuscar != ""){
 
-								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion FROM fomope WHERE (rfc='$rfcBuscar' AND quincenaAplicada='$qnaBuscar' AND anio='$anioBuscar')";
+								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE (rfc='$rfcBuscar' AND quincenaAplicada='$qnaBuscar' AND anio='$anioBuscar')";
 
 							}elseif ($rfcBuscar != "" && $qnaBuscar == "" && $anioBuscar == "") {
 								
-								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion FROM fomope WHERE (rfc='$rfcBuscar')";
+								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE (rfc='$rfcBuscar')";
 								
 							}elseif ($rfcBuscar == "" && $qnaBuscar != "" && $anioBuscar != "") {
 								
-								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion FROM fomope WHERE ( quincenaAplicada='$qnaBuscar' AND anio='$anioBuscar')";
+								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE ( quincenaAplicada='$qnaBuscar' AND anio='$anioBuscar')";
 								
 							}elseif ($rfcBuscar == "" && $qnaBuscar == "" && $anioBuscar == "") {
 								
-								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion FROM fomope WHERE (rfc='$rfcBuscar' AND quincenaAplicada='$qnaBuscar' AND anio='$anioBuscar')";
+								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE (rfc='$rfcBuscar' AND quincenaAplicada='$qnaBuscar' AND anio='$anioBuscar')";
 								
 							}elseif ($rfcBuscar != "" && $qnaBuscar != "" && $anioBuscar == "") {
 								
-								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion FROM fomope WHERE (rfc='$rfcBuscar' AND quincenaAplicada='$qnaBuscar')";
+								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE (rfc='$rfcBuscar' AND quincenaAplicada='$qnaBuscar')";
 								
 							}elseif ($rfcBuscar != "" && $qnaBuscar == "" && $anioBuscar != "") {
 								
-								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion FROM fomope WHERE (rfc='$rfcBuscar' AND anio='$anioBuscar')";
+								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE (rfc='$rfcBuscar' AND anio='$anioBuscar')";
 								
 							}elseif ($rfcBuscar == "" && $qnaBuscar != "" && $anioBuscar == "") {
 								
-								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion FROM fomope WHERE (  quincenaAplicada='$qnaBuscar')";
+								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE (  quincenaAplicada='$qnaBuscar')";
 								
 							}elseif ($rfcBuscar == "" && $qnaBuscar == "" && $anioBuscar != "") {
 								
-								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion FROM fomope WHERE (anio='$anioBuscar')";
+								$sql="SELECT id_movimiento,color_estado,unidad,rfc,quincenaAplicada,fechaIngreso,codigoMovimiento, fechaAutorizacion, fechaCaptura FROM fomope WHERE (anio='$anioBuscar')";
 								
 							}
 
@@ -334,42 +356,62 @@
 								}else{
 
 
-									while($ver=mysqli_fetch_row($result)){ 
+					while($ver=mysqli_fetch_row($result)){ 
+						switch ($ver[1]) {
+											case 'negro1':
+												$estadoF = 'DDSCH Rechazo';
+												break;
+											case 'negro':
+												$estadoF = 'Unidad Edición';
+												break;
+											case 'amarillo':
+												$estadoF = 'DSPO captura';
+												break;		
+											case 'amarillo0':
+												$estadoF = 'DDSCH Autorización';
+												break;
+											case 'cafe':
+												$estadoF = 'DSPO Autorización';
+												break;	
+											case 'naranja':
+												$estadoF = 'DIPSP Autorización';
+												break;
+											case 'azul':
+												$estadoF= 'DGRHO Autorización';
+												break;
+											case 'rosa':
+												$estadoF = 'DSPO nomina';
+												break;		
+											case 'verde':
+												$estadoF = 'DDSCH loteo';
+												break;
+											case 'verde2':
+												$estadoF = 'DDSCH Autorización Loteo';
+												break;	
+											case 'gris':
+												$estadoF = 'DDSCH Edición';
+												break;
+											case 'guinda':
+												$estadoF = 'Finalizado';
+												break;		
+											default:
+												
+												break;
+										}
 
 						 ?>
-		<br>
-		<br>
-
-		<table class="table table-hover table-white">
-						<thead>
-						    <tr>
-							<!-- <td>Observacion</td>
-							<td>ID Fomope</td> -->
-						          <th scope="titulo">Color del estado</th>
-						      <th scope="titulo">Unidad</th>
-						      <th scope="titulo">RFC</th>
-						      <th scope="titulo">QNA</th>
-						      <th scope="titulo">Fecha de Ingreso</th>
-						      <th scope="titulo">Codigo Mov.</th>
-						      <th scope="titulo">Fecha de Autorizador</th>
-						      
-						   </tr>
-					 	 </thead>
-
-					
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
 							<td><?php echo $ver[5] ?></td>
 							<td><?php echo $ver[6] ?></td>
 							<td><?php echo $ver[7] ?></td>
-							
+							<td><?php echo $ver[8] ?></td>	
 
-
-							<td>
-								
+							<td>		
 								<?php
 									if ($resultColor = mysqli_query($conexion,$sqlColor)) {
 										$verColor=mysqli_fetch_row($resultColor);
@@ -378,8 +420,8 @@
 										$colores2 = explode(",",$verColor[0]);
 										//echo $verColor[0] . "  >>>>>>>";
 										//echo $colores2[1] . "  >>>>>>>";
+										$datosCaptura = $ver[0]."||".$usuarioSeguir."||0";
 
-										
 										if($totalColor != 0){
 											if($ver[1] == "negro1" ){
 										$datos=$ver[0]."||".$usuarioSeguir."||4";
@@ -458,11 +500,21 @@
 					        		$id_mov = $row['id_movimiento'];
 					        	}
 					        	$datos=$ver[0]."||".$usuarioSeguir."||1";
+					        	switch ($ver[1]) {
+											
+											case 'amarillo':
+												$estadoF = 'DSPO captura';
+												break;		
+											
+											default:
+												
+												break;
+										}
 
 						 ?>
 
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
@@ -537,12 +589,20 @@
 					        		$id_mov = $row['id_movimiento'];
 					        	}
 					        	$datos=$ver[0]."||".$usuarioSeguir."||4";
-
+					        	switch ($ver[1]) {
+											case 'negro1':
+												$estadoF = 'DDSCH Rechazo';
+												break;
+										
+											default:
+												
+												break;
+										}
 
 						 ?>
 
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>
@@ -617,12 +677,21 @@
 					        		$id_mov = $row['id_movimiento'];
 					        	}
 					        	$datos=$id_mov."||".$usuarioSeguir."||6";
-
+					        	switch ($ver[1]) {
+											
+											case 'rosa':
+												$estadoF = 'DSPO nomina';
+												break;		
+											
+											default:
+												
+												break;
+										}
 
 						 ?>
 
 						<tr>
-							<td><?php echo $ver[1] ?></td>
+							<td><?php echo $estadoF ?></td>
 							<td><?php echo $ver[2] ?></td>
 							<td><?php echo $ver[3] ?></td>
 							<td><?php echo $ver[4] ?></td>

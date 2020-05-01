@@ -73,8 +73,49 @@
 					$sqlImp  = "SELECT * FROM fomope WHERE id_movimiento = '$arr[$i]'";
 					if($resImp = mysqli_query($conexion, $sqlImp)){
 						$imprimirRow = mysqli_fetch_row($resImp);
+						switch ($imprimirRow[1]) {
+											case 'negro1':
+												$estadoF = 'DDSCH Rechazo';
+												break;
+											case 'negro':
+												$estadoF = 'Unidad Edición';
+												break;
+											case 'amarillo':
+												$estadoF = 'DSPO captura';
+												break;		
+											case 'amarillo0':
+												$estadoF = 'DDSCH Autorización';
+												break;
+											case 'cafe':
+												$estadoF = 'DSPO Autorización';
+												break;	
+											case 'naranja':
+												$estadoF = 'DIPSP Autorización';
+												break;
+											case 'azul':
+												$estadoF= 'DGRHO Autorización';
+												break;
+											case 'rosa':
+												$estadoF = 'DSPO nomina';
+												break;		
+											case 'verde':
+												$estadoF = 'DDSCH loteo';
+												break;
+											case 'verde2':
+												$estadoF = 'DDSCH Autorización Loteo';
+												break;	
+											case 'gris':
+												$estadoF = 'DDSCH Edición';
+												break;
+											case 'guinda':
+												$estadoF = 'Finalizado';
+												break;		
+											default:
+												
+												break;
+										}
 						$objPHPExcel->getActiveSheet()->setCellValue('A'.$fila, $imprimirRow[0]); 
-		                $objPHPExcel->getActiveSheet()->setCellValue('B'.$fila, $imprimirRow[1]); 
+		                $objPHPExcel->getActiveSheet()->setCellValue('B'.$fila, $estadoF); 
 		                $objPHPExcel->getActiveSheet()->setCellValue('C'.$fila, $imprimirRow[2]); 
 		                $objPHPExcel->getActiveSheet()->setCellValue('D'.$fila, $imprimirRow[3]); 
 		                $objPHPExcel->getActiveSheet()->setCellValue('E'.$fila, $imprimirRow[4]); 
