@@ -48,7 +48,10 @@
 				$objPHPExcel = $objReader->load($fileName);
 				$fecha_recibido =$_POST['fechaIngreso'];
 				$motivoR = $_POST['comentarioR'];
-				$idfom = $_POST['idFom'];
+				$idfom = $_POST['id'];
+				$apellido1Add = strtoupper($_POST['apellido1']);	
+				$apellido2Add = strtoupper($_POST['apellido2']);	
+				$nombreAdd = strtoupper($_POST['nombre']);
 
 				$usuario = $_POST['userName'];
 					$sqlNombre = "SELECT * from usuarios WHERE usuario = '$usuario'";
@@ -63,7 +66,7 @@
 				if($resUni = mysqli_query($conexion, $sqlUnidad)){
 					$rowUni = mysqli_fetch_row($resUni);
 					$objPHPExcel->getActiveSheet()->setCellValue('H11',$fecha_recibido); 
-			        $objPHPExcel->getActiveSheet()->setCellValue('D13', $rowUni[2]." ".$rowUni[3]." ".$rowUni[4]); 
+			        $objPHPExcel->getActiveSheet()->setCellValue('D13', $apellido1Add." ".$apellido2Add." ".$nombreAdd); 
 			        $objPHPExcel->getActiveSheet()->setCellValue('D15', $_POST['cod2_1']); 
 			        $objPHPExcel->getActiveSheet()->setCellValue('D19', $_POST['unexp_1']); 
 			        $objPHPExcel->getActiveSheet()->setCellValue('D23', $motivoR); 

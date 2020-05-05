@@ -232,7 +232,10 @@
 		                $objPHPExcel->getActiveSheet()->setCellValue('DL'.$fila, $imprimirRow[115]); 
 		                $objPHPExcel->getActiveSheet()->setCellValue('DM'.$fila, $imprimirRow[116]); 
 		                $objPHPExcel->getActiveSheet()->setCellValue('DN'.$fila, $imprimirRow[117]);
-		                $objPHPExcel->getActiveSheet()->setCellValue('DO'.$fila, $imprimirRow[118]); 
+		                $objPHPExcel->getActiveSheet()->setCellValue('DO'.$fila, $imprimirRow[118]);
+		                $objPHPExcel->getActiveSheet()->setCellValue('DP'.$fila, $imprimirRow[119]);
+		                $objPHPExcel->getActiveSheet()->setCellValue('DQ'.$fila, $imprimirRow[120]); 
+
 		                $fila++;
 					}else{
 						echo "hay fallas";
@@ -240,7 +243,7 @@
 				}    
    
                         $fila--;
-                    	$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A8:DO".$fila);
+                    	$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A8:DQ".$fila);
 						$objPHPExcel->getActiveSheet()->getStyle("A8:DO".$fila)->applyFromArray($estiloTituloColumnas);
                 // Write the file
                         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, $fileType);
