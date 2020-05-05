@@ -130,10 +130,9 @@
 
 
 		// // --- Guardamos el documento
-		$templateWord->saveAs('Documento02.docx');
-
-		header("Content-Disposition: attachment; filename=Documento02.docx; charset=iso-8859-1");
-		echo file_get_contents('Documento02.docx');        
+		$templateWord->saveAs('generarWordProfesionalCarrera/documentos/DGRHO_DIPSP_2020_MEMORANDUM_'.$idProfesionalC.'.docx');
+		header("Content-Disposition: attachment; filename=DGRHO_DIPSP_2020_MEMORANDUM_".$idProfesionalC.".docx; charset=iso-8859-1");
+		echo file_get_contents('generarWordProfesionalCarrera/documentos/DGRHO_DIPSP_2020_MEMORANDUM_'.$idProfesionalC.'.docx');     
 		exit();
 
 	}

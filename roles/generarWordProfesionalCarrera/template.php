@@ -28,9 +28,9 @@ $idProfO = $_POST['idProf'];
 			$templateWord->setValue('unidad',$unidadO);
 			$templateWord->setValue('idProfCar',$idProfesionalC);
 			// // --- Guardamos el documento
-			$templateWord->saveAs('Documento02.docx');
-			header("Content-Disposition: attachment; filename=Documento02.docx; charset=iso-8859-1");
-			echo file_get_contents('Documento02.docx');
+			$templateWord->saveAs('documentos/DGRHO_DIPSP_2020_MEMORANDUM_'.$idPC.'.docx');
+			header("Content-Disposition: attachment; filename=DGRHO_DIPSP_2020_MEMORANDUM_".$idPC.".docx; charset=iso-8859-1");
+			echo file_get_contents('documentos/DGRHO_DIPSP_2020_MEMORANDUM_'.$idPC.'.docx');
 			}else{
 				
 				$sqlA = "UPDATE fomope SET idProfesionalCarrera = '$idProfO' WHERE id_movimiento = '$idFomope'";
@@ -52,9 +52,9 @@ $idProfO = $_POST['idProf'];
 						$templateWord->setValue('unidad',$unidadO);
 						$templateWord->setValue('idProfCar',$idProfesionalC);
 						// // --- Guardamos el documento
-						$templateWord->saveAs('Documento02.docx');
-						header("Content-Disposition: attachment; filename=Documento02.docx; charset=iso-8859-1");
-						echo file_get_contents('Documento02.docx');
+						$templateWord->saveAs('documentos/DGRHO_DIPSP_2020_MEMORANDUM_'.$idPC.'.docx');
+				header("Content-Disposition: attachment; filename=DGRHO_DIPSP_2020_MEMORANDUM_".$idPC.".docx; charset=iso-8859-1");
+				echo file_get_contents('documentos/DGRHO_DIPSP_2020_MEMORANDUM_'.$idPC.'.docx');
 
 				}else{
 				}
