@@ -215,8 +215,6 @@ $(document).ready(function(){
 
 			}
 
-			
-
 			function verBoton(){
 					var a = $("#ofunid").val();
 				    var b = $("#fechaofi").val();
@@ -227,6 +225,7 @@ $(document).ready(function(){
 				    //var g = $("#MotivoRechazo").val();
 			  
 				    //var h = $("#TipoEntregaArchivo").val();
+					 $('#idProfesional').removeAttr("required");
 				    
 				    if (a=="" || b=="" || c==""|| d==""|| e==""|| f=="") {
 				      		return false;

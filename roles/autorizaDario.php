@@ -1,8 +1,4 @@
 
-<?php
-  $mysqli = new mysqli('localhost', 'root', '', 'p_fomopes');
-?>
-
 <!DOCTYPE html>
 <html>
 	<head>

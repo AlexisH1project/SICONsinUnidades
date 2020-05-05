@@ -458,7 +458,7 @@
 												         <textarea class="form-control border border-dark" id="idProf" rows = "4" name="idProf" placeholder="id Profesional de carrera" required></textarea>
 												      <div class="modal-footer">
 												        <button type="button" class="btn btn-secondary" data-dismiss="modal">REGRESAR</button>
-														<input type="submit" class="btn btn-primary" id="generar" name="generar" value="Acturlizar ID y Descargar Reporte">
+														<input type="submit" class="btn btn-primary" id="generar" name="generar" value="Autorizar ID y Descargar Reporte">
 												      </div>
 												    </div>
 												  </div>
