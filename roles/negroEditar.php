@@ -546,7 +546,7 @@
 						  		<div class="md-form md-0">
 								    <!-- <label  class="plantilla-label" for="archivo_1">Adjuntar un archivos</label> -->
 								    <!--  <input type="hidden" name="MAX_FILE_SIZE" value="30000" /> -->
-								    <input type="file" id="nameArchivo" name="nameArchivo" required>
+								    <input type="file" id="nameArchivo" name="nameArchivo" >
 								   <!--  <p class="help-block">Ejemplo de texto de ayuda.</p> -->
 								</div>
 							</div>
