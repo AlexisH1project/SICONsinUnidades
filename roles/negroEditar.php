@@ -186,15 +186,16 @@
 				      if (a=="" || tamRFC<13 || tamCURP<18 || d==""|| e==""|| f==""|| g==""|| $('input:radio[name=TipoEntregaArchivo]:checked').val() =="Ninguno" ) {
 				        alert("Falta completar campo");		
 				        return false;
-				      } else 
+				      } else {
 				      	formulario.submit();
 		 }
+		}
 		
 
 			function elimiarDatos(){
 				<?php 
 
-					$sqlEliminar = "UPDATE fomope SET colorEstado = 'rojo WHERE id_movimiento = '$idMovSeg'";
+					$sqlEliminar = "UPDATE fomope SET colorEstado = 'rojo' WHERE id_movimiento = '$idMovSeg'";
 
 				?>
 			}	
