@@ -220,7 +220,7 @@
 						
 
 				  		  <div class="form-group">
-						    <label for="archivo_1">Adjuntar un archivo (.zip)</label>
+						    <label for="archivo_1">Adjuntar un archivo (.pdf)</label>
 						    <!--  <input type="hidden" name="MAX_FILE_SIZE" value="30000" /> -->
 						    <input type="file" name="nameArchivo" required>
 						   <!--  <p class="help-block">Ejemplo de texto de ayuda.</p> -->

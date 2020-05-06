@@ -11,7 +11,7 @@
 		$fechaEntregaUnidadAdd = $_POST['fechaEntregaUnidad'];
 		$ofEntregaUnidadAdd = $_POST['ofEntregaUnidad'];
 		$ofEntregaSeg = $_POST['ofEntrega'];
-		$dir_subida = './documentosLoteo/';
+		$dir_subida = './documentos/';
 
 		$hoy = "select CURDATE()";
 		$tiempo ="select curTime()";
@@ -21,6 +21,7 @@
 			 		$row2 = mysqli_fetch_row($resultTime);
 			 }
 
+
 		$sqlNameArch = "SELECT rfc, id_movimiento, nombre, apellido_1, apellido_2 FROM fomope WHERE id_movimiento = $id_Fom";
 
 			if($result = mysqli_query($conexion,$sqlNameArch)){
@@ -28,41 +29,55 @@
 
 			}
 			// Arreglo con todos los nombres de los archivos
-			$files = array_diff(scandir($dir_subida), array('.', '..')); 	
-			foreach($files as $file){
-			    // Divides en dos el nombre de tu archivo utilizando el . 
-			    $data = explode("_",$file);
-			    // Nombre del archivo
-			    $fileName = $data[0];
-			    // Extensión del archivo 
-			    $extenc = $data[1];
-			    $idArch = explode(".",$extenc);
-			 
-			    if($rfcRow[0] == $fileName){
-			    	if($idArch[0] == $id_Fom ){
-			      		unlink($dir_subida.$rfcRow[0]."_".$rfcRow[4]."_".$rfcRow[3]."_".$rfcRow[2]."_".$id_Fom.".zip");
-			        	break;
-			    	}
-			    }
-			}
+		
+		$files = array_diff(scandir($dir_subida), array('.', '..')); 
+		
+		foreach($files as $file){
+		    // Divides en dos el nombre de tu archivo utilizando el . 
+		    $data = explode("_",$file);
+		    $data2 = explode(".",$file);
+			$indice = count($data2);	
 
-			$fichero_subido = $dir_subida . basename($_FILES['nameArchivo']['name']);
-			if (move_uploaded_file($_FILES['nameArchivo']['tmp_name'], $fichero_subido)) {
-				sleep(3);
-				rename ($fichero_subido,$dir_subida.$rfcRow[0]."_".$rfcRow[4]."_".$rfcRow[3]."_".$rfcRow[2]."_".$id_Fom.".zip");
-			} else {
-				if ($result = mysqli_query($conexion,$sqlRol)) {
-					$rowRol = mysqli_fetch_row($result);
+			$extencion = $data2[$indice-1];
+		    // Nombre del archivo
+		    $extractRfc = $data[0];
+		    $nameAdj = $data[1];
+		    // Extensión del archivo 
 
-			   		if($rowRol[0] == '0'){
-	               			echo "<script> alert('Existe un error al guardar el archivo'); window.location.href = '../verdeLulu.php?usuario_rol=$rolSegimiento'</script>";
-					}else if($rowRol[0] == '1'){
-	               			echo "<script> alert('Existe un error al guardar el archivo'); window.location.href = '../verdeLulu.php?usuario_rol=$rolSegimiento'</script>";
-					}
+		    if($rfcRow[0] == $extractRfc AND "DOC70" == $nameAdj){
+		    		$sqlUpDoc = "UPDATE fomope SET doc70 = 'doc70'  WHERE id_movimiento = '$id_Fom' ";
+		    		if($respUp = mysqli_query($conexion,$sqlUpDoc)){
+
+		    		}else{ echo "error conexion";}
+
+		      		unlink($dir_subida.$rfcRow[0]."_DOC70_".$rfcRow[4]."_".$rfcRow[3]."_".$rfcRow[2]."_".$id_Fom."_.pdf");
+		        	break;
+		    }
+		}
+
+		$fichero_subido = $dir_subida . basename($_FILES['nameArchivo']['name']);
+		$extencion2 = explode(".",$fichero_subido);
+		$tamnio = count($extencion2);
+
+		$extencion3 = $extencion2[$tamnio-1];
+
+		if (move_uploaded_file($_FILES['nameArchivo']['tmp_name'], $fichero_subido)) {
+			sleep(3);
+			rename ($fichero_subido,$dir_subida.$rfcRow[0]."_DOC70_".$rfcRow[4]."_".$rfcRow[3]."_".$rfcRow[2]."_".$id_Fom."_.pdf");
+			
+				
+		}else {
+			if ($result = mysqli_query($conexion,$sqlRol)) {
+				$rowRol = mysqli_fetch_row($result);
+
+		   		if($rowRol[0] == '0'){
+               			echo "<script> alert('Existe un error al guardar el archivo'); window.location.href = '../verdeLulu.php?usuario_rol=$rolSegimiento'</script>";
+				}else if($rowRol[0] == '1'){
+               			echo "<script> alert('Existe un error al guardar el archivo'); window.location.href = '../verdeLulu.php?usuario_rol=$rolSegimiento'</script>";
 				}
 			}
+		}
 
-		
 		if($fechaRLaboralesAdd <= $row[0] AND $fechaEntregaUnidadAdd <= $row[0]){
 
 			$sqlRol = "SELECT id_rol FROM usuarios WHERE usuario = '$rolSegimiento'";
@@ -80,7 +95,7 @@
 
 
 					}else if($rowRol[0] == '1'){
-							$sqlL = "UPDATE fomope SET color_estado='verde2',usuario_name='$rolSegimiento', oficioEntrega = '$ofEntregaSeg', fechaEntregaRLaborales='$fechaRLaboralesAdd',OfEntregaRLaborales='$ofEntregaRLAdd',fechaEntregaUnidad = '$fechaEntregaUnidadAdd',OfEntregaUnidad='$ofEntregaUnidadAdd', fechaAutorizacion= '$row[0] - $rolSegimiento' WHERE id_movimiento = '$id_Fom'";
+							$sqlL = "UPDATE fomope SET color_estado='guinda',usuario_name='$rolSegimiento', oficioEntrega = '$ofEntregaSeg', fechaEntregaRLaborales='$fechaRLaboralesAdd',OfEntregaRLaborales='$ofEntregaRLAdd',fechaEntregaUnidad = '$fechaEntregaUnidadAdd',OfEntregaUnidad='$ofEntregaUnidadAdd', fechaAutorizacion= '$row[0] - $rolSegimiento' WHERE id_movimiento = '$id_Fom'";
 							mysqli_query($conexion,$sqlL);
 	               			echo "<script> alert('Fomope Actualizado'); window.location.href = '../lulu.php?usuario_rol=$rolSegimiento'</script>";
 

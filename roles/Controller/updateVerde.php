@@ -29,31 +29,47 @@
 
 			}
 			// Arreglo con todos los nombres de los archivos
-			$files = array_diff(scandir($dir_subida), array('.', '..')); 	
-			foreach($files as $file){
-			    // Divides en dos el nombre de tu archivo utilizando el . 
-			    $data = explode("_",$file);
-			    // Nombre del archivo
-			    $fileName = $data[0];
-			    // Extensión del archivo 
-			    $extenc = $data[1];
-			    $idArch = explode(".",$extenc);
-			  
-			    if($rfcRow[0] == $fileName){
-			    	if($idArch[0] == $id_Fom ){
-			      		unlink($dir_subida.$rfcRow[0]."_".$rfcRow[4]."_".$rfcRow[3]."_".$rfcRow[2]."_".$id_Fom.".zip");
-			        	break;
-			    	}
-			    }
-			}
+			$files = array_diff(scandir($dir_subida), array('.', '..')); 
+		
+		foreach($files as $file){
+		    // Divides en dos el nombre de tu archivo utilizando el . 
+		    $data = explode("_",$file);
+		    $data2 = explode(".",$file);
+			$indice = count($data2);	
 
-			$fichero_subido = $dir_subida . basename($_FILES['nameArchivo']['name']);
+			$extencion = $data2[$indice-1];
+		    // Nombre del archivo
+		    $extractRfc = $data[0];
+		    $nameAdj = $data[1];
+		    // Extensión del archivo 
 
+		    if($rfcRow[0] == $extractRfc AND "DOC70" == $nameAdj){
+		    		$sqlUpDoc = "UPDATE fomope SET doc70 = 'doc70'  WHERE id_movimiento = '$id_Fom' ";
+		    		if($respUp = mysqli_query($conexion,$sqlUpDoc)){
 
-			if (move_uploaded_file($_FILES['nameArchivo']['tmp_name'], $fichero_subido)) {
-				sleep(3);
-				rename ($fichero_subido,$dir_subida.$rfcRow[0]."_".$rfcRow[4]."_".$rfcRow[3]."_".$rfcRow[2]."_".$id_Fom.".zip");
-			} else {
+		    		}else{ echo "error conexion";}
+
+		      		unlink($dir_subida.$rfcRow[0]."_DOC70_".$rfcRow[4]."_".$rfcRow[3]."_".$rfcRow[2]."_".$id_Fom."_.pdf");
+		        	break;
+		    }
+		}
+
+		$fichero_subido = $dir_subida . basename($_FILES['nameArchivo']['name']);
+		$extencion2 = explode(".",$fichero_subido);
+		$tamnio = count($extencion2);
+
+		$extencion3 = $extencion2[$tamnio-1];
+
+		if (move_uploaded_file($_FILES['nameArchivo']['tmp_name'], $fichero_subido)) {
+			$sqlUpDoc = "UPDATE fomope SET doc70 = 'doc70'  WHERE id_movimiento = '$id_Fom' ";
+		    		if($respUp = mysqli_query($conexion,$sqlUpDoc)){
+
+		    		}else{ echo "error conexion";}
+			sleep(3);
+			rename ($fichero_subido,$dir_subida.$rfcRow[0]."_DOC70_".$rfcRow[4]."_".$rfcRow[3]."_".$rfcRow[2]."_".$id_Fom."_.pdf");
+			
+				
+		} else {
 					if($_FILES['nameArchivo']['name'] == ''){
 							// no pasa nada sigue ... 
 					}else{
@@ -80,7 +96,7 @@
 
 
 					}else if($rowRol[0] == '1'){
-							$sqlL = "UPDATE fomope SET color_estado='verde2',usuario_name='$rolSegimiento', oficioEntrega = '$ofEntregaSeg', fechaEntregaRLaborales='$fechaRLaboralesAdd',OfEntregaRLaborales='$ofEntregaRLAdd',fechaEntregaUnidad = '$fechaEntregaUnidadAdd',OfEntregaUnidad='$ofEntregaUnidadAdd', 	justificacionRechazo= '$motivoR', fechaAutorizacion= '$row[0] - $rolSegimiento' WHERE id_movimiento = '$id_Fom'";
+							$sqlL = "UPDATE fomope SET color_estado='guinda',usuario_name='$rolSegimiento', oficioEntrega = '$ofEntregaSeg', fechaEntregaRLaborales='$fechaRLaboralesAdd',OfEntregaRLaborales='$ofEntregaRLAdd',fechaEntregaUnidad = '$fechaEntregaUnidadAdd',OfEntregaUnidad='$ofEntregaUnidadAdd', 	justificacionRechazo= '$motivoR', fechaAutorizacion= '$row[0] - $rolSegimiento' WHERE id_movimiento = '$id_Fom'";
 							mysqli_query($conexion,$sqlL);
 	               			echo "<script> alert('Fomope Actualizado'); window.location.href = '../lulu.php?usuario_rol=$rolSegimiento'</script>";
 
