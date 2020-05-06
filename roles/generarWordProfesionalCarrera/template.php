@@ -32,14 +32,18 @@ $idProfO = $_POST['idProf'];
 			header("Content-Disposition: attachment; filename=DGRHO_DIPSP_2020_MEMORANDUM_".$idPC.".docx; charset=iso-8859-1");
 			echo file_get_contents('documentos/DGRHO_DIPSP_2020_MEMORANDUM_'.$idPC.'.docx');
 			}else{
-				
+				$idProfO = $_POST['idProf'];
 				$sqlA = "UPDATE fomope SET idProfesionalCarrera = '$idProfO' WHERE id_movimiento = '$idFomope'";
 				if ($result = mysqli_query($conexion,$sqlA)) {
+
 					$rfcO = $_POST['rfcL_1'];
 					$unidadO = $_POST['unexp_1'];
 					$idProfO = $_POST['idProf'];
 					$sql2="SELECT * FROM `fomope` WHERE rfc = '$rfcO' AND unidad = '$unidadO'";
-						if ($result2 = mysqli_query($conexion,$sql2)) {
+						
+						$res1=mysqli_query($conexion,$sql2)or die("problema con la consulta");
+						if ($result2 = mysqli_fetch_array($res1)) {
+
 						$nombre = $result2['nombre'];
 					    $apellido_P = $result2['apellido_1'];
 					    $apellido_M = $result2['apellido_2'];

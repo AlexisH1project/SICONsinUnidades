@@ -5,7 +5,7 @@
 		$usuarioEdito = $_POST['userName'];
 		$idFomope = $_POST['idFom'];
 
-		$elBoton = $_POST['accionB'];
+		//$elBoton = $_POST['accionB'];
 /*
 			$tiempo =  date_default_timezone_set("America/Mexico_City");
 			$tiempo =  time();
@@ -32,7 +32,7 @@
 				echo '<script type="text/javascript">alert("Error en la conexion");</script>';
 				echo '<script type="text/javascript">alert("error '. mysqli_error($conexion).'");</script>';
 			}
-
+/*
 	if($elBoton == "bandeja principal"){
 		
 
@@ -45,7 +45,7 @@
 								
 				  echo "<script>window.location.href = './lulu.php?usuario_rol=$usuarioEdito'</script>";
 				}
-	}
+	}*/
 	
 
  ?>

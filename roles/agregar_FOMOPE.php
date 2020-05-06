@@ -118,7 +118,7 @@
 		    $apellido_M = $data['apellido_2'];
 		    $unidadO = $data['unidad'];
 		     $idProfesionalC = $data['idProfesionalCarrera'];
-		}  
+		  
 
 		// // --- Asignamos valores a la plantilla
 		$templateWord->setValue('nombres',$nombre);
@@ -134,6 +134,7 @@
 		header("Content-Disposition: attachment; filename=DGRHO_DIPSP_2020_MEMORANDUM_".$idProfesionalC.".docx; charset=iso-8859-1");
 		echo file_get_contents('generarWordProfesionalCarrera/documentos/DGRHO_DIPSP_2020_MEMORANDUM_'.$idProfesionalC.'.docx');     
 		exit();
+	}
 
 	}
 	
