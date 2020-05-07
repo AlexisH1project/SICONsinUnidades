@@ -12,7 +12,7 @@
 		$ofEntregaUnidadAdd = $_POST['ofEntregaUnidad'];
 		$ofEntregaSeg = $_POST['ofEntrega'];
 		$motivoR = $_POST['comentarioR'];
-		$dir_subida = './documentosLoteo/';
+		$dir_subida = './documentos';
 
 		$hoy = "select CURDATE()";
 		$tiempo ="select curTime()";
